@@ -17,12 +17,11 @@
   </head>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
+      
       <div id="header"></div>
 
       <div id="admin-menu"></div>
 
-      <div id="modalContainer1"></div>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -30,12 +29,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Productos</h1>
+                <h1>Mis ventas</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Productos</li>
+                  <li class="breadcrumb-item active">mis ventas</li>
                 </ol>
               </div>
             </div>
@@ -47,14 +46,14 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12 text-right mb-2">
-                <button class="btn btn-danger btn-sm" onclick="loadNewProducto()">
-                  Nuevo producto
+                <button class="btn btn-warning btn-sm">
+                  Nueva venta
                 </button>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-12">
-                <table id="listProductos" style="width:100%">
+                <table id="listcategorias" style="width:100%">
                   <thead>
                       <tr>
                           <th>Fecha de Registro</th>
@@ -85,17 +84,8 @@
   <!-- fullCalendar 2.2.5 -->
   <script src="/assets/plugins/moment/moment.min.js"></script>
   <script src="/assets/plugins/fullcalendar/main.js"></script>
-
   <!-- AdminLTE for demo purposes -->
   <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  
-
-  <!-- jquery-validation -->
-  <script src="/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-  <script src="/assets/plugins/jquery-validation/additional-methods.min.js"></script>
   <script type="text/javascript" src="/app/layout/layout-controller.js"></script>
-  <script type="text/javascript" src="/app/productos/productos-controller.js"></script>
-  
   </body>
 </html>
