@@ -1,4 +1,5 @@
 var dt_productos;
+var producto_to_delete;
 $(document).ready(function() {
   dt_productos = $('#listProductos').DataTable({
     "ajax":{
@@ -23,7 +24,7 @@ $(document).ready(function() {
       {
         "targets":3,
         "render":function(data, type, row){
-          return "<a href='#'>Editar</a> │ <a href='#'>Eliminar</a>";
+          return "<button class='btn btn-warning btn-sm' onclick=\"loadEditProducto('"+row.id+"')\"><i class=' fa fa-edit'></i> Editar</button> <button class='btn btn-danger btn-sm' onclick=\"loadConfirmDelete('"+ row.id +"');\"><i class='fa fa-trash'></i> Eliminar</button>";
         },
       },
     ]
@@ -34,16 +35,38 @@ function updateDatatable(){
   dt_productos.ajax.reload();
 }
 
+function loadConfirmDelete(id){
+  producto_to_delete = id;
+  $('#modalContainer1').load("/views/productos/frm-confirm-delete.html", function(response){
+    $('#mdlConfirmDelete').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
+  });
+}
+
 function loadNewProducto(){
 
   $('#modalContainer1').load("/views/productos/frm-new-producto.html", function(response){
     $('#mdlNuevoProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
   });
-  /*$('#modal1').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});*/
-  /*var url = '/views/productos/frm-new-producto.html';
-  $('#modalContainer1').load(url, function(result){
+}
 
-    console.log("hola1");
-    $('#mdCreate').modal({show: true, backdrop: 'static', size: 'lg', keyboard: 'false'});
-  });*/
+function loadEditProducto(id){
+  $('#modalContainer1').load("/views/productos/frm-edit-producto.html", function(response){
+    loadDataProducto(id);
+  });
+}
+
+function loadDataProducto(id){
+  $.ajax({
+    method: "GET",
+    url: "http://apis-app.com/api/productos/"+id,
+  }).done(function(response){
+
+    $("#txtId").val(response.data.id);
+    $("#txtCodigo").val(response.data.codigo);
+    $("#txtNombre").val(response.data.nombre);
+    $("#txtPrecio").val("");
+
+    $('#mdlEditProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
+  });
+  
 }
