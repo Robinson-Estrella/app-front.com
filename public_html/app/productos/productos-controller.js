@@ -24,6 +24,12 @@ $(document).ready(function() {
       {
         "targets":3,
         "render":function(data, type, row){
+          return row.categoria.nombre;
+        },
+      },
+      {
+        "targets":4,
+        "render":function(data, type, row){
           return "<button class='btn btn-warning btn-sm' onclick=\"loadEditProducto('"+row.id+"')\"><i class=' fa fa-edit'></i> Editar</button> <button class='btn btn-danger btn-sm' onclick=\"loadConfirmDelete('"+ row.id +"');\"><i class='fa fa-trash'></i> Eliminar</button>";
         },
       },
