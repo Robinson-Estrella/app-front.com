@@ -24,7 +24,13 @@ $(document).ready(function() {
       {
         "targets":3,
         "render":function(data, type, row){
-          return row.categoria.nombre;
+          if(row.categoria){
+            return row.categoria.nombre;
+          }
+          else{
+            ""
+          }
+          
         },
       },
       {
