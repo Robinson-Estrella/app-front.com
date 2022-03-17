@@ -1,27 +1,16 @@
-<div  class="modal fade" id="mdlNewProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  class="modal fade" id="mdlEditCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nuevo Producto</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="formNewProducto">
+      <form id="formEditCategoria">
+        <input type="hidden" name="txtId" id="txtId">
         <div class="modal-body">
           <!-- form start -->
-          <div class="form-group">
-            <label for="cmbCategoria">Categoria</label>
-            <select class="form-control" id="cmbCategoria" name="cmbCategoria">
-              <option></option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-
           <div class="form-group">
             <label for="txtCodigo">Código</label>
             <input type="text" name="txtCodigo" class="form-control" id="txtCodigo" placeholder="Ingrese código">
@@ -31,15 +20,10 @@
             <label for="txtNombre">Nombre</label>
             <input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Ingrese nombre">
           </div>
-
-          <div class="form-group">
-            <label for="txtPrecio">Precio</label>
-            <input type="number" name="txtPrecio" class="form-control" id="txtPrecio" placeholder="Ingrese precio">
-          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </form>
     </div>
@@ -51,41 +35,31 @@
       submitHandler: function () {
         
         $.ajax({
-          method: "post",
-          url: "http://apis-app.com/api/productos",
+          method: "put",
+          url: "http://apis-app.com/api/categorias",
           data:{
-            codigo: $("#cmbCategoria").val(), 
+            id: $("#txtId").val(), 
             codigo: $("#txtCodigo").val(), 
             nombre: $("#txtNombre").val(),
-            precio: $("#txtPrecio").val()
           }
         }).done(function(msg){
 
           $("#txtCodigo").val("");
           $("#txtNombre").val("");
-          $("#txtPrecio").val("");
 
-          $("#mdlNewProducto").modal("hide");
+          $("#mdlEditCategoria").modal("hide");
           updateDatatable();
 
-          console.log("El producto ha sido guardado")
-          /**alert("Data Saved" + msg);*/
         });
 
       }
     });
-    $('#formNewProducto').validate({
+    $('#formEditCategoria').validate({
       rules: {
         txtCodigo: {
           required: true,
         },
         txtNombre: {
-          required: true,
-        },
-        txtPrecio: {
-          required: true,
-        },
-        cmbCategoria:{
           required: true,
         }
       },
@@ -95,12 +69,6 @@
         },
         txtNombre: {
           required: "Ingrese el nombre",
-        },
-        txtPrecio: {
-          required: "Ingrese el precio",
-        },
-        cmbCategoria:{
-          required: "Es necesario la categoría"
         }
       },
       errorElement: 'span',

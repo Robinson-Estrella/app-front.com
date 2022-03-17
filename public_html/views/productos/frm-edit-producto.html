@@ -12,6 +12,18 @@
         <div class="modal-body">
           <!-- form start -->
           <div class="form-group">
+            <label for="cmbCategoria">Categoria</label>
+            <select class="form-control" id="cmbCategoria" name="cmbCategoria">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
             <label for="txtCodigo">Código</label>
             <input type="text" name="txtCodigo" class="form-control" id="txtCodigo" placeholder="Ingrese código">
           </div>
@@ -23,7 +35,7 @@
 
           <div class="form-group">
             <label for="txtPrecio">Precio</label>
-            <input type="number" name="txtPrecio" class="form-control" id="txtPrecio" placeholder="Ingrese nombre">
+            <input type="number" name="txtPrecio" class="form-control" id="txtPrecio" placeholder="Ingrese precio">
           </div>
         </div>
         <div class="modal-footer">
@@ -44,6 +56,7 @@
           url: "http://apis-app.com/api/productos",
           data:{
             id: $("#txtId").val(), 
+            categoria_id: $("#cmbCategoria").val(),
             codigo: $("#txtCodigo").val(), 
             nombre: $("#txtNombre").val(),
             precio: $("#txtPrecio").val()
@@ -71,6 +84,9 @@
         },
         txtPrecio: {
           required: true,
+        },
+        cmbCategoria: {
+          required: true,
         }
       },
       messages: {
@@ -82,6 +98,9 @@
         },
         txtPrecio: {
           required: "Ingrese el precio",
+        },
+        cmbCategoria: {
+          required: "Es necesario la categoría"
         }
       },
       errorElement: 'span',

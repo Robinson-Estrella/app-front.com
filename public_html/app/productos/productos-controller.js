@@ -1,5 +1,6 @@
 var dt_productos;
 var producto_to_delete;
+
 $(document).ready(function() {
   dt_productos = $('#listProductos').DataTable({
     "ajax":{
@@ -26,11 +27,9 @@ $(document).ready(function() {
         "render":function(data, type, row){
           if(row.categoria){
             return row.categoria.nombre;
+          }else{
+            return "";
           }
-          else{
-            ""
-          }
-          
         },
       },
       {
@@ -57,7 +56,7 @@ function loadConfirmDelete(id){
 function loadNewProducto(){
 
   $('#modalContainer1').load("/views/productos/frm-new-producto.html", function(response){
-    $('#mdlNuevoProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
+    $('#mdlNewProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
   });
 }
 
@@ -69,16 +68,16 @@ function loadEditProducto(id){
 
 function loadDataProducto(id){
   $.ajax({
-    method: "GET",
-    url: "http://apis-app.com/api/productos/"+id,
+    method: "get",
+    url: "http://apis-app.com/api/productos/"+id
   }).done(function(response){
 
     $("#txtId").val(response.data.id);
     $("#txtCodigo").val(response.data.codigo);
     $("#txtNombre").val(response.data.nombre);
-    $("#txtPrecio").val("");
-
+    //$("#txtPrecio").val("");
     $('#mdlEditProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
-  });
+    
+  }); 
   
 }
