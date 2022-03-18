@@ -36,6 +36,7 @@
         $.ajax({
           method: "post",
           url: "http://apis-app.com/api/categorias",
+          headers: {"Authorization": "Bearer "+_token},
           data:{
             codigo: $("#txtCodigo").val(), 
             nombre: $("#txtNombre").val(),
@@ -47,9 +48,6 @@
 
           $("#mdlNewCategoria").modal("hide");
           updateDatatable();
-
-          console.log("El producto ha sido guardado")
-          /**alert("Data Saved" + msg);*/
         });
 
       }

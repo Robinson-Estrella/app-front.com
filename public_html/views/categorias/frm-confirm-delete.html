@@ -24,6 +24,7 @@
     $.ajax({
           method: "delete",
           url: "http://apis-app.com/api/categorias/"+categoria_to_delete,
+          headers: {"Authorization": "Bearer "+_token}
         }).done(function(msg){
 
           $("#mdlConfirmDelete").modal("hide");

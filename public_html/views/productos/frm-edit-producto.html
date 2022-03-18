@@ -14,12 +14,7 @@
           <div class="form-group">
             <label for="cmbCategoria">Categoria</label>
             <select class="form-control" id="cmbCategoria" name="cmbCategoria">
-              <option></option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+              <option>Seleccionar categoria</option>
             </select>
           </div>
 
@@ -54,6 +49,7 @@
         $.ajax({
           method: "put",
           url: "http://apis-app.com/api/productos",
+          headers: {"Authorization": "Bearer "+_token},
           data:{
             id: $("#txtId").val(), 
             categoria_id: $("#cmbCategoria").val(),

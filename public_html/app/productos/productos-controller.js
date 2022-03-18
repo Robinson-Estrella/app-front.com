@@ -1,11 +1,14 @@
+
 var dt_productos;
 var producto_to_delete;
 
 $(document).ready(function() {
+  
   dt_productos = $('#listProductos').DataTable({
     "ajax":{
       type: 'get',
-      url :"http://apis-app.com/api/productos",
+      url: "http://apis-app.com/api/productos",
+      headers: {"Authorization": "Bearer "+_token},
       dataSrc: 'data',
       cache: true
     },
@@ -13,8 +16,6 @@ $(document).ready(function() {
       {
         "targets": 0,
         "render": function(data, type, row){
-          //console.log(row);
-          //return row.created_at;
 
           return moment(row.created_at).format('DD/MM/YYYY HH:mm:ss');
         },
@@ -25,17 +26,17 @@ $(document).ready(function() {
       {
         "targets":3,
         "render":function(data, type, row){
-          if(row.categoria){
+          if(row.categoria)
             return row.categoria.nombre;
-          }else{
+          else
             return "";
-          }
+          
         },
       },
       {
         "targets":4,
         "render":function(data, type, row){
-          return "<button class='btn btn-warning btn-sm' onclick=\"loadEditProducto('"+row.id+"')\"><i class=' fa fa-edit'></i> Editar</button> <button class='btn btn-danger btn-sm' onclick=\"loadConfirmDelete('"+ row.id +"');\"><i class='fa fa-trash'></i> Eliminar</button>";
+          return "<button class='btn btn-sm btn-outline-success' onclick=\"loadEditProducto('"+row.id+"')\"><i class=' fa fa-edit'></i> Editar</button> <button class='btn btn-outline-danger btn-sm' onclick=\"loadConfirmDelete('"+ row.id +"');\"><i class='fa fa-trash'></i> Eliminar</button>";
         },
       },
     ]
@@ -56,23 +57,52 @@ function loadConfirmDelete(id){
 function loadNewProducto(){
 
   $('#modalContainer1').load("/views/productos/frm-new-producto.html", function(response){
-    $('#mdlNewProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
+
+    $.ajax({
+      method: "get",
+      headers: {"Authorization": "Bearer "+_token},
+      url: "http://apis-app.com/api/categorias"
+      
+    }).done(function(response){
+      for(i=0; i<response.data.length; i++){
+        item = response.data[i];
+        $("#cmbCategoria").append(new Option(item.nombre, item.id));
+
+      }
+      $('#mdlNewProducto').modal({show: true, backdrop: 'static', size: 'lg', keyboard: false});
+    });
+    
   });
 }
 
 function loadEditProducto(id){
   $('#modalContainer1').load("/views/productos/frm-edit-producto.html", function(response){
-    loadDataProducto(id);
+    $.ajax({
+      method: "get",
+      headers: {"Authorization": "Bearer "+_token},
+      url: "http://apis-app.com/api/categorias"
+      
+    }).done(function(response){
+      for(i=0; i<response.data.length; i++){
+        item = response.data[i];
+        $("#cmbCategoria").append(new Option(item.nombre, item.id));
+
+      }
+      loadDataProducto(id);
+    });
+    
   });
 }
 
 function loadDataProducto(id){
   $.ajax({
     method: "get",
-    url: "http://apis-app.com/api/productos/"+id
+    url: "http://apis-app.com/api/productos/"+id,
+    headers: {"Authorization": "Bearer "+_token}
   }).done(function(response){
 
     $("#txtId").val(response.data.id);
+    $("#cmbCategoria").val(response.data.categoria_id);
     $("#txtCodigo").val(response.data.codigo);
     $("#txtNombre").val(response.data.nombre);
     //$("#txtPrecio").val("");
