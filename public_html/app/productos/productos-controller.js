@@ -7,7 +7,7 @@ $(document).ready(function() {
   dt_productos = $('#listProductos').DataTable({
     "ajax":{
       type: 'get',
-      url: "http://apis-app.com/api/productos",
+      url: "http://apis.com/api/productos",
       headers: {"Authorization": "Bearer "+_token},
       dataSrc: 'data',
       cache: true
@@ -61,7 +61,7 @@ function loadNewProducto(){
     $.ajax({
       method: "get",
       headers: {"Authorization": "Bearer "+_token},
-      url: "http://apis-app.com/api/categorias"
+      url: "http://apis.com/api/categorias"
       
     }).done(function(response){
       for(i=0; i<response.data.length; i++){
@@ -80,7 +80,7 @@ function loadEditProducto(id){
     $.ajax({
       method: "get",
       headers: {"Authorization": "Bearer "+_token},
-      url: "http://apis-app.com/api/categorias"
+      url: "http://apis.com/api/categorias"
       
     }).done(function(response){
       for(i=0; i<response.data.length; i++){
@@ -97,7 +97,7 @@ function loadEditProducto(id){
 function loadDataProducto(id){
   $.ajax({
     method: "get",
-    url: "http://apis-app.com/api/productos/"+id,
+    url: "http://apis.com/api/productos/"+id,
     headers: {"Authorization": "Bearer "+_token}
   }).done(function(response){
 

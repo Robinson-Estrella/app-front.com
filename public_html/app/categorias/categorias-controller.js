@@ -5,7 +5,7 @@ $(document).ready(function() {
   dt_categorias = $('#listCategorias').DataTable({
     "ajax":{
       type: 'get',
-      url :"http://apis-app.com/api/categorias",
+      url :"http://apis.com/api/categorias",
       headers: {"Authorization": "Bearer "+_token},
       dataSrc: 'data',
       cache: true
@@ -57,7 +57,7 @@ function loadEditCategoria(id){
 function loadDataCategoria(id){
   $.ajax({
     method: "get",
-    url: "http://apis-app.com/api/categorias/"+id,
+    url: "http://apis.com/api/categorias/"+id,
     headers: {"Authorization": "Bearer "+_token}
   }).done(function(response){
 

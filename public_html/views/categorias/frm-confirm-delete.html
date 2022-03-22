@@ -23,7 +23,7 @@
   function deleteProducto(){
     $.ajax({
           method: "delete",
-          url: "http://apis-app.com/api/categorias/"+categoria_to_delete,
+          url: "http://apis.com/api/categorias/"+categoria_to_delete,
           headers: {"Authorization": "Bearer "+_token}
         }).done(function(msg){
 
